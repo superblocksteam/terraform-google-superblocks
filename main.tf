@@ -5,6 +5,7 @@ module "cloud_run" {
   count  = var.deploy_in_cloud_run ? 1 : 0
   source = "./modules/cloud-run"
 
+  project_id  = var.project_id
   region      = var.region
   internal    = var.internal
   name_prefix = var.name_prefix
@@ -21,4 +22,18 @@ module "cloud_run" {
     "SUPERBLOCKS_AGENT_ENVIRONMENT"            = var.superblocks_agent_environment,
     "SUPERBLOCKS_AGENT_PORT"                   = var.superblocks_agent_port
   }
+}
+
+#################################################################
+# DNS
+#################################################################
+module "dns" {
+  count  = var.create_dns ? 1 : 0
+  source = "./modules/dns"
+
+  project_id  = var.project_id
+  region      = var.region
+  zone_name   = var.zone_name
+  record_name = var.record_name
+  route_name  = module.cloud_run[0].route_name
 }

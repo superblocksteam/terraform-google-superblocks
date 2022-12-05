@@ -26,8 +26,8 @@ module "terraform_google_superblocks" {
   region     = var.region
   internal   = false
 
-  create_dns                 = false
-  superblocks_agent_host_url = "https://custom-url.koalitytools.com"
+  zone_name   = "koalitytools-com"
+  record_name = "example-simple-public-agent"
 
   superblocks_agent_key         = var.superblocks_agent_key
   superblocks_agent_environment = "dev"
@@ -36,10 +36,3 @@ module "terraform_google_superblocks" {
   #superblocks_agent_image       = "ghcr.io/superblocksteam/superblocks-agent-simplified:ts-opa-simplification"
   #superblocks_agent_port        = "8020"
 }
-
-# Once Superblocks Agent is deployed to Cloud Run, create the DNS record manually.
-# Go to "Cloud Run -> Manage Custom Domains -> Add Mappings"
-#   follow the instructions to
-#   1. verify your domain
-#   2. create the mapping
-#   3. update DNS record

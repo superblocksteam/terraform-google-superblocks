@@ -3,6 +3,7 @@ resource "google_cloud_run_service" "superblocks" {
   location = var.region
 
   metadata {
+    namespace = var.project_id
     annotations = {
       "run.googleapis.com/ingress" = "${local.ingress_rule}"
     }

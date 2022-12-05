@@ -1,11 +1,19 @@
 #################################################################
 # Common
 #################################################################
+variable "project_id" {
+  type = string
+  validation {
+    condition     = length(var.project_id) > 0
+    error_message = "Variable `project_id` cannot be null."
+  }
+}
+
 variable "region" {
   type = string
   validation {
     condition     = length(var.region) > 0
-    error_message = "Variable `region` cannot null."
+    error_message = "Variable `region` cannot be null."
   }
 }
 
