@@ -2,6 +2,12 @@ resource "google_cloud_run_service" "superblocks" {
   name     = "${var.name_prefix}-cloud-run-service"
   location = var.region
 
+  metadata {
+    annotations = {
+      "run.googleapis.com/ingress" = "${local.ingress_rule}"
+    }
+  }
+
   template {
     spec {
       containers {
@@ -32,7 +38,6 @@ resource "google_cloud_run_service" "superblocks" {
       annotations = {
         "autoscaling.knative.dev/minScale" = "${var.container_min_capacity}"
         "autoscaling.knative.dev/maxScale" = "${var.container_max_capacity}"
-        "run.googleapis.com/ingress"       = "${local.ingress_rule}"
       }
     }
   }
