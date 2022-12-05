@@ -24,7 +24,9 @@ module "terraform_google_superblocks" {
   source     = "../../"
   project_id = var.project_id
   region     = var.region
-  internal   = false
+  # Set 'internal' to true if we want Cloun Run service is accessible
+  # only in the same project or VPC
+  internal = false
 
   zone_name   = "koalitytools-com"
   record_name = "example-simple-public-agent"
