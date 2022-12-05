@@ -22,7 +22,7 @@ resource "google_cloud_run_service" "superblocks" {
         dynamic "env" {
           for_each = var.container_env
           content {
-            name  = env.name
+            name  = env.key
             value = env.value
           }
         }

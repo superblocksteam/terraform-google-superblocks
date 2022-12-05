@@ -27,8 +27,8 @@ variable "container_port" {
 }
 
 variable "container_env" {
-  type    = list(any)
-  default = []
+  type    = map(any)
+  default = {}
 }
 
 variable "container_requests_cpu" {

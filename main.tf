@@ -11,38 +11,14 @@ module "cloud_run" {
 
   container_port  = var.superblocks_agent_port
   container_image = var.superblocks_agent_image
-  container_env = [
-    {
-      name  = "__SUPERBLOCKS_AGENT_SERVER_URL"
-      value = var.superblocks_server_url
-    },
-    {
-      name  = "__SUPERBLOCKS_WORKER_LOCAL_ENABLED"
-      value = "true"
-    },
-    {
-      name  = "SUPERBLOCKS_WORKER_TLS_INSECURE"
-      value = "true"
-    },
-    {
-      name  = "SUPERBLOCKS_AGENT_KEY"
-      value = var.superblocks_agent_key
-    },
-    {
-      name  = "SUPERBLOCKS_CONTROLLER_DISCOVERY_ENABLED"
-      value = "false"
-    },
-    {
-      name  = "SUPERBLOCKS_AGENT_HOST_URL"
-      value = var.superblocks_agent_host_url
-    },
-    {
-      name  = "SUPERBLOCKS_AGENT_ENVIRONMENT"
-      value = var.superblocks_agent_environment
-    },
-    {
-      name  = "SUPERBLOCKS_AGENT_PORT"
-      value = var.superblocks_agent_port
-    }
-  ]
+  container_env = {
+    "__SUPERBLOCKS_AGENT_SERVER_URL"           = var.superblocks_server_url,
+    "__SUPERBLOCKS_WORKER_LOCAL_ENABLED"       = "true",
+    "SUPERBLOCKS_WORKER_TLS_INSECURE"          = "true",
+    "SUPERBLOCKS_AGENT_KEY"                    = var.superblocks_agent_key,
+    "SUPERBLOCKS_CONTROLLER_DISCOVERY_ENABLED" = "false",
+    "SUPERBLOCKS_AGENT_HOST_URL"               = var.superblocks_agent_host_url,
+    "SUPERBLOCKS_AGENT_ENVIRONMENT"            = var.superblocks_agent_environment,
+    "SUPERBLOCKS_AGENT_PORT"                   = var.superblocks_agent_port
+  }
 }
