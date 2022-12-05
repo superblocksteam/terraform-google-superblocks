@@ -86,7 +86,7 @@ variable "deploy_in_cloud_run" {
 #################################################################
 variable "create_dns" {
   type        = bool
-  default     = false
+  default     = true
   description = <<EOF
     If a valid Google Managed Zone is available,
     set 'create_dns' to 'true' to let this module create default DNS record
