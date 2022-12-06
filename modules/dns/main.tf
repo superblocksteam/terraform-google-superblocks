@@ -25,5 +25,5 @@ resource "google_dns_record_set" "superblocks" {
   name         = "${var.record_name}.${local.dns_name}"
   ttl          = 300
   type         = "CNAME"
-  rrdatas      = [google_cloud_run_domain_mapping.superblocks.status[0].resource_records[0].rrdata]
+  rrdatas      = ["${var.record_name}.${local.dns_name}"]
 }
