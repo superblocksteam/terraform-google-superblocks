@@ -22,6 +22,12 @@ module "cloud_run" {
     "SUPERBLOCKS_AGENT_ENVIRONMENT"            = var.superblocks_agent_environment,
     "SUPERBLOCKS_AGENT_PORT"                   = var.superblocks_agent_port
   }
+  container_requests_cpu    = var.container_requests_cpu
+  container_requests_memory = var.container_requests_memory
+  container_limits_cpu      = var.container_limits_cpu
+  container_limits_memory   = var.container_limits_memory
+  container_max_capacity    = var.container_max_capacity
+  container_min_capacity    = var.container_min_capacity
 }
 
 #################################################################

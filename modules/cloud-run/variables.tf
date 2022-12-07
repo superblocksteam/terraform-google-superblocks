@@ -26,7 +26,7 @@ variable "internal" {
 
 variable "container_image" {
   type    = string
-  default = ""
+  default = "gcr.io/terraform-testing-369414/agent"
 }
 
 variable "container_port" {

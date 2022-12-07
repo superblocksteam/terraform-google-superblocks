@@ -15,18 +15,15 @@ variable "region" {
 }
 
 variable "zone_name" {
-  type    = string
-  default = null
+  type        = string
+  default     = null
+  description = "This is the name of Google DNS Managed Zone that in the same project"
 }
 
 variable "record_name" {
-  type    = string
-  default = "agent"
-}
-
-variable "route_name" {
-  type    = string
-  default = ""
+  type        = string
+  default     = "agent"
+  description = "This is the record that will be created in Google DNS Managed Zone"
 }
 
 variable "namespace" {

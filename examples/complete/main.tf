@@ -6,7 +6,7 @@ provider "google" {
 
 variable "project_id" {
   type    = string
-  default = "<YOUR GOOGLE CLOUD PROJECT ID>"
+  default = "<GOOGLE_CLOUD_PROJECT_ID>"
 }
 
 variable "region" {
@@ -16,19 +16,21 @@ variable "region" {
 
 variable "superblocks_agent_key" {
   type      = string
-  default   = "YOUR AGENT KEY"
+  default   = "<SUPERBLOCKS_AGENT_KEY>"
   sensitive = true
 }
 
 module "cloud_run" {
   source = "../../modules/cloud-run"
 
-  project_id      = var.project_id
-  region          = var.region
-  name_prefix     = "superblocks"
-  internal        = false
+  project_id  = var.project_id
+  region      = var.region
+  name_prefix = "superblocks"
+  internal    = false
+
   container_image = "us-docker.pkg.dev/cloudrun/container/hello"
   container_port  = "8020"
+
   container_env = {
     "__SUPERBLOCKS_AGENT_SERVER_URL"           = "https://app.superblocks.com",
     "__SUPERBLOCKS_WORKER_LOCAL_ENABLED"       = "true",
@@ -36,7 +38,7 @@ module "cloud_run" {
     "SUPERBLOCKS_AGENT_KEY"                    = var.superblocks_agent_key,
     "SUPERBLOCKS_CONTROLLER_DISCOVERY_ENABLED" = "false",
     "SUPERBLOCKS_AGENT_HOST_URL"               = "https://example-complete.koalitytools.com",
-    "SUPERBLOCKS_AGENT_ENVIRONMENT"            = "dev",
+    "SUPERBLOCKS_AGENT_ENVIRONMENT"            = "*",
     "SUPERBLOCKS_AGENT_PORT"                   = "8020"
   }
 

@@ -27,11 +27,12 @@ variable "superblocks_agent_key" {
 }
 
 variable "superblocks_agent_environment" {
-  type = string
-  validation {
-    condition     = length(var.superblocks_agent_environment) > 0
-    error_message = "The agent environment cannot be null."
-  }
+  type        = string
+  default     = "*"
+  description = <<EOF
+    Use this varible to differentiate Superblocks Agent running environment.
+    Valid values are "*", "staging" and "production"
+  EOF
 }
 
 variable "superblocks_agent_host_url" {
@@ -40,13 +41,15 @@ variable "superblocks_agent_host_url" {
 }
 
 variable "superblocks_agent_port" {
-  type    = number
-  default = "8020"
+  type        = number
+  default     = "8020"
+  description = "The port number used by Superblocks Agent container instance"
 }
 
 variable "superblocks_agent_image" {
-  type    = string
-  default = ""
+  type        = string
+  default     = "gcr.io/terraform-testing-369414/agent"
+  description = "The docker image used by Superblocks Agent container instance"
 }
 
 variable "superblocks_server_url" {
@@ -55,8 +58,9 @@ variable "superblocks_server_url" {
 }
 
 variable "name_prefix" {
-  type    = string
-  default = "superblocks"
+  type        = string
+  default     = "superblocks"
+  description = "This will be prepended to the name of each resource created by this module"
 }
 
 #################################################################
@@ -80,6 +84,41 @@ variable "deploy_in_cloud_run" {
     We will support other deployment options in the future.
   EOF
 }
+
+variable "container_requests_cpu" {
+  type        = string
+  default     = "512m"
+  description = "Amount of CPU millicores."
+}
+
+variable "container_requests_memory" {
+  type        = string
+  default     = "1024Mi"
+  description = "Amount of memory in MiB"
+}
+
+variable "container_limits_cpu" {
+  type        = string
+  default     = "1.0"
+  description = "CPU limit, must be equal to one of [.08-1], 1.0, 2.0, 4.0, 6.0, 8.0"
+}
+
+variable "container_limits_memory" {
+  type        = string
+  default     = "2048Mi"
+  description = "Amount of memory in MiB"
+}
+
+variable "container_min_capacity" {
+  type    = number
+  default = "1"
+}
+
+variable "container_max_capacity" {
+  type    = number
+  default = "5"
+}
+
 
 #################################################################
 # DNS
