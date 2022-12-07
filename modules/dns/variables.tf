@@ -26,6 +26,12 @@ variable "record_name" {
   description = "This is the record that will be created in Google DNS Managed Zone"
 }
 
+variable "route_name" {
+  type        = string
+  default     = ""
+  description = "This is route of Cloud Run service. New DNS record will be mapped to it"
+}
+
 variable "namespace" {
   type    = string
   default = "superblocks"
