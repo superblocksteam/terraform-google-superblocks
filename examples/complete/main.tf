@@ -28,7 +28,7 @@ module "cloud_run" {
   name_prefix = "superblocks"
   internal    = false
 
-  container_image = "us-docker.pkg.dev/cloudrun/container/hello"
+  container_image = "gcr.io/superblocks-registry/agent"
   container_port  = "8020"
 
   container_env = {
