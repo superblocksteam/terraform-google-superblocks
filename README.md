@@ -30,8 +30,8 @@ module "terraform_google_superblocks" {
   source  = "superblocksteam/terraform-google-superblocks"
   version = ">=1.0"
 
-  project_id = var.project_id
-  region     = var.region
+  project_id = "<GOOGLE_CLOUD_PROJECT_ID>"
+  region     = "<GOOGLE_CLOUD_REGION>"
 
   create_dns                 = false
   superblocks_agent_host_url = "<SUPERBLOCKS_AGENT_HOST_URL>"
