@@ -26,7 +26,7 @@ variable "internal" {
 
 variable "container_image" {
   type    = string
-  default = "gcr.io/superblocks-registry/agent"
+  default = "us-east1-docker.pkg.dev/superblocks-registry/agent/simplified"
 }
 
 variable "container_port" {
