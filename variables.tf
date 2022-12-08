@@ -43,7 +43,7 @@ variable "superblocks_agent_port" {
 
 variable "superblocks_agent_image" {
   type        = string
-  default     = "us-east1-docker.pkg.dev/superblocks-registry/agent/simplified"
+  default     = "us-east1-docker.pkg.dev/superblocks-registry/superblocks/agent"
   description = "The docker image used by Superblocks Agent container instance"
 }
 

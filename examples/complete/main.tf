@@ -28,7 +28,7 @@ module "cloud_run" {
   name_prefix = "superblocks"
   internal    = false
 
-  container_image = "us-east1-docker.pkg.dev/superblocks-registry/agent/simplified"
+  container_image = "us-east1-docker.pkg.dev/superblocks-registry/superblocks/agent"
   container_port  = "8020"
 
   container_env = {
