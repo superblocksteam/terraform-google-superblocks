@@ -19,7 +19,7 @@ resource "google_cloud_run_service" "superblocks" {
             memory = "${var.container_requests_memory}"
           }
           limits = {
-            cpu    = "${var.container_limits_cpu}"
+            #cpu    = "${var.container_limits_cpu}"
             memory = "${var.container_limits_memory}"
           }
         }
