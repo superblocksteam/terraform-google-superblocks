@@ -34,11 +34,11 @@ module "terraform_google_superblocks" {
   region     = "<GOOGLE_CLOUD_REGION>"
 
   superblocks_agent_key = "<YOUR_AGENT_KEY>"
-​
+  
   # Subdomain & domain in you Superblocks agent host url, for example superblocks.example.com
   sudomain = "<YOUR_SUBDOMAIN>"
   domain   = "<YOUR_DOMAIN>"
-​
+  
   # Google Cloud DNS Zone Name
   zone_name = "<YOUR_DOMAINS_CLOUD_DNS_ZONE_NAME>"
 }
@@ -54,18 +54,18 @@ terraform apply
 ### Advanced Configuration
 #### Private Networking
 The Terraform module configures your Cloud Run service's ingress to "Allow all traffic." You can update the ingress rules to "Only allow internal traffic" by adding the following to the Terraform module
-​
+
 ```
 internal = true
 ```
 
 #### Custom Domain Mapping
 By default, this module will try to configure a **custom domain** for your Cloud Run service, for example `subdomain.example.com`. This configures both the [Cloud Run Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains#map) and a CNAME DNS record for your `domain`.
-​
+
 For this to work successfully, you must verify ownership of your `domain` with Google, and have a Cloud DNS Zone configured for the domain. To verify domain ownership, use the Google CLI command `gcloud domains verify ${domain}`. Find the Cloud DNS Zone Name for your domain by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`.
-​
+
 If you don't use Google Cloud DNS, or want to manually configure the Domain Mapping, just disable DNS creation by adding the following to the Terraform module
-​
+
 ```
 create_dns = false
 ```
