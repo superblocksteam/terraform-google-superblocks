@@ -33,11 +33,17 @@ module "terraform_google_superblocks" {
   project_id = "<GOOGLE_CLOUD_PROJECT_ID>"
   region     = "<GOOGLE_CLOUD_REGION>"
 
-  create_dns                 = false
-  superblocks_agent_host_url = "<SUPERBLOCKS_AGENT_HOST_URL>"
-  superblocks_agent_key      = "<SUPERBLOCKS_AGENT_KEY>"
+  superblocks_agent_key = "<YOUR_AGENT_KEY>"
+​
+  # Subdomain & domain in you Superblocks agent host url, for example superblocks.example.com
+  sudomain = "<YOUR_SUBDOMAIN>"
+  domain   = "<YOUR_DOMAIN>"
+​
+  # Google Cloud DNS Zone Name
+  zone_name = "<YOUR_DOMAINS_CLOUD_DNS_ZONE_NAME>"
 }
 ```
+If you use Google Cloud DNS, find the `zone_name` for your `domain` by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`. If you don't use Google Cloud DNS, see the [Custom Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains) section for how you can manually configure the DNS for your agent.
 
 #### Deploy
 ```
@@ -45,31 +51,29 @@ terraform init
 terraform apply
 ```
 
-#### Create the domain mapping manually
-Once Superblocks Agent is deployed to Cloud Run, create the DNS record manually. Go to "Cloud Run -> Manage Custom Domains -> Add Mappings". Follow the instructions to
-
-1. verify your domain
-2. create the mapping
-3. update DNS record
-
 ### Advanced Configuration
 #### Private Networking
-By default the Terraform module configures the Cloud Run service's ingress to allow all traffic. Limit ingress to allow internal traffic only by adding
+The Terraform module configures your Cloud Run service's ingress to "Allow all traffic." You can update the ingress rules to "Only allow internal traffic" by adding the following to the Terraform module
+​
 ```
 internal = true
 ```
 
-#### DNS
-The module will try to creates a DNS record. For this to work successfully, you need to have a managed zone in the same project and set the `zone_name` and `record_name`. On the other hand, if you want to create the domain mapping manually, set `create_dns` to false and set `superblocks_agent_host_url`
+#### Custom Domain Mapping
+By default, this module will try to configure a **custom domain** for your Cloud Run service, for example `subdomain.example.com`. This configures both the [Cloud Run Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains#map) and a CNAME DNS record for your `domain`.
+​
+For this to work successfully, you must verify ownership of your `domain` with Google, and have a Cloud DNS Zone configured for the domain. To verify domain ownership, use the Google CLI command `gcloud domains verify ${domain}`. Find the Cloud DNS Zone Name for your domain by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`.
+​
+If you don't use Google Cloud DNS, or want to manually configure the Domain Mapping, just disable DNS creation by adding the following to the Terraform module
+​
 ```
-zone_name   = "my-managed-zone-name-com"
-record_name = "agent"
-# or
-create_dns                 = false
-superblocks_agent_host_url = "https://agent.my-managed-zone.com"
+create_dns = false
 ```
+
+If you decide to manually set up a custom domain for your Cloud Run service, follow Google's instructions for [Mapping customer domains](https://cloud.google.com/run/docs/mapping-custom-domains#run)
+
 #### Instance Sized
-Configure the CPU & memory limits allocated to your Cloud Run instances use
+Configure the CPU & memory limits for your Cloud Run instances by adding the following variables to your Terraform module
 ```
 container_requests_cpu    = "512m"
 container_requests_memory = "1024Mi"
@@ -79,7 +83,7 @@ container_limits_memory   = "2048Mi"
 ```
 
 #### Scaling
-Google will automatically scale your Cloud Run instances based on traffic. To configure the minimum and maximum number of instances the agent can scale to, add
+Google will automatically scale your Cloud Run instances based on traffic. To configure the minimum and maximum number of instances the agent can scale to, add these variables to your Terraform module
 ```
 container_min_capacity    = "1"
 container_max_capacity    = "5"
@@ -94,12 +98,6 @@ variable "superblocks_agent_environment" {
     Use this varible to differentiate Superblocks Agent running environment.
     Valid values are "*", "staging" and "production"
   EOF
-}
-
-variable "superblocks_agent_port" {
-  type        = number
-  default     = "8020"
-  description = "The port number used by Superblocks Agent container instance"
 }
 
 variable "superblocks_agent_image" {

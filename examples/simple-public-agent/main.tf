@@ -26,7 +26,9 @@ module "terraform_google_superblocks" {
   project_id = var.project_id
   region     = var.region
 
-  zone_name             = "koalitytools-com"
-  record_name           = "example-simple-public-agent"
   superblocks_agent_key = var.superblocks_agent_key
+
+  subdomain = "example-simple-public-agent"
+  domain    = "koalitytools.com"
+  zone_name = "koalitytools-com"
 }

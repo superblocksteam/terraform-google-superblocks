@@ -26,9 +26,11 @@ module "terraform_google_superblocks" {
   project_id = var.project_id
   region     = var.region
 
-  create_dns                 = false
-  superblocks_agent_host_url = "https://custom-url.koalitytools.com"
-  superblocks_agent_key      = var.superblocks_agent_key
+  superblocks_agent_key = var.superblocks_agent_key
+
+  subdomain  = "custom-url"
+  domain     = "koalitytools.com"
+  create_dns = false
 }
 
 # Once Superblocks Agent is deployed to Cloud Run, create the DNS record manually.

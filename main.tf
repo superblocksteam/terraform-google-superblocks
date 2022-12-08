@@ -18,7 +18,7 @@ module "cloud_run" {
     "SUPERBLOCKS_WORKER_TLS_INSECURE"          = "true",
     "SUPERBLOCKS_AGENT_KEY"                    = var.superblocks_agent_key,
     "SUPERBLOCKS_CONTROLLER_DISCOVERY_ENABLED" = "false",
-    "SUPERBLOCKS_AGENT_HOST_URL"               = var.superblocks_agent_host_url,
+    "SUPERBLOCKS_AGENT_HOST_URL"               = "https://${var.subdomain}.${var.domain}",
     "SUPERBLOCKS_AGENT_ENVIRONMENT"            = var.superblocks_agent_environment,
     "SUPERBLOCKS_AGENT_PORT"                   = var.superblocks_agent_port
   }
@@ -40,6 +40,6 @@ module "dns" {
   project_id  = var.project_id
   region      = var.region
   zone_name   = var.zone_name
-  record_name = var.record_name
+  record_name = var.subdomain
   route_name  = module.cloud_run[0].route_name
 }

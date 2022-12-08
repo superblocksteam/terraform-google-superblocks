@@ -35,11 +35,6 @@ variable "superblocks_agent_environment" {
   EOF
 }
 
-variable "superblocks_agent_host_url" {
-  type    = string
-  default = ""
-}
-
 variable "superblocks_agent_port" {
   type        = number
   default     = "8020"
@@ -137,7 +132,11 @@ variable "zone_name" {
   default = ""
 }
 
-variable "record_name" {
+variable "subdomain" {
   type    = string
   default = "agent"
+}
+
+variable "domain" {
+  type = string
 }
