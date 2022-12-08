@@ -75,10 +75,9 @@ If you decide to manually set up a custom domain for your Cloud Run service, fol
 #### Instance Sized
 Configure the CPU & memory limits for your Cloud Run instances by adding the following variables to your Terraform module
 ```
-container_requests_cpu    = "512m"
-container_requests_memory = "1024Mi"
-container_limits_cpu      = "1.0"
-container_limits_memory   = "2048Mi"
+container_requests_cpu    = "1"
+container_requests_memory = "4Gi"
+container_limits_memory   = "4Gi"
 
 ```
 
