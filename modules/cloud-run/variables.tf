@@ -41,26 +41,26 @@ variable "container_env" {
 
 variable "container_requests_cpu" {
   type        = string
-  default     = "512m"
-  description = "Amount of CPU millicores."
+  default     = "1"
+  description = "Amount of CPU cores."
 }
 
 variable "container_requests_memory" {
   type        = string
-  default     = "1024Mi"
-  description = "Amount of memory in MiB"
+  default     = "4Gi"
+  description = "Amount of memory in GiB"
 }
 
 variable "container_limits_cpu" {
   type        = string
-  default     = "1.0"
+  default     = "2.0"
   description = "CPU limit, must be equal to one of [.08-1], 1.0, 2.0, 4.0, 6.0, 8.0"
 }
 
 variable "container_limits_memory" {
   type        = string
-  default     = "2048Mi"
-  description = "Amount of memory in MiB"
+  default     = "4Gi"
+  description = "Amount of memory in GiB"
 }
 
 variable "container_min_capacity" {
