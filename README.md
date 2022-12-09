@@ -35,7 +35,7 @@ module "terraform_google_superblocks" {
 
   superblocks_agent_key = "[YOUR_AGENT_KEY]"
   
-  # Subdomain & domain in you Superblocks agent host url, for example superblocks.example.com
+  # Subdomain & domain in your Superblocks agent host url, for example superblocks.example.com
   sudomain = "[YOUR_SUBDOMAIN]"
   domain   = "[YOUR_DOMAIN]"
   
