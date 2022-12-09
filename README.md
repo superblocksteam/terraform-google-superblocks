@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/logo.png" height="60"/>
+  <img src="https://raw.githubusercontent.com/superblocksteam/terraform-google-superblocks/main/assets/logo.png" height="60"/>
 </p>
 
 <h1 align="center">Superblocks Terraform Module - Google</h1>
@@ -30,17 +30,17 @@ module "terraform_google_superblocks" {
   source  = "superblocksteam/superblocks/google"
   version = ">=0.1.0"
 
-  project_id = "<GOOGLE_CLOUD_PROJECT_ID>"
-  region     = "<GOOGLE_CLOUD_REGION>"
+  project_id = "[GOOGLE_CLOUD_PROJECT_ID]"
+  region     = "[GOOGLE_CLOUD_REGION]"
 
-  superblocks_agent_key = "<YOUR_AGENT_KEY>"
+  superblocks_agent_key = "[YOUR_AGENT_KEY]"
   
   # Subdomain & domain in you Superblocks agent host url, for example superblocks.example.com
-  sudomain = "<YOUR_SUBDOMAIN>"
-  domain   = "<YOUR_DOMAIN>"
+  sudomain = "[YOUR_SUBDOMAIN]"
+  domain   = "[YOUR_DOMAIN]"
   
   # Google Cloud DNS Zone Name
-  zone_name = "<YOUR_DOMAINS_CLOUD_DNS_ZONE_NAME>"
+  zone_name = "[YOUR_DOMAINS_CLOUD_DNS_ZONE_NAME]"
 }
 ```
 If you use Google Cloud DNS, find the `zone_name` for your `domain` by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`. If you don't use Google Cloud DNS, see the [Custom Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains) section for how you can manually configure the DNS for your agent.
@@ -93,10 +93,10 @@ container_max_capacity    = "5"
 variable "superblocks_agent_environment" {
   type        = string
   default     = "*"
-  description = <<EOF
+  description = <<ENVIRONMENT
     Use this varible to differentiate Superblocks Agent running environment.
     Valid values are "*", "staging" and "production"
-  EOF
+  ENVIRONMENT
 }
 
 variable "superblocks_agent_image" {
