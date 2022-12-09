@@ -105,6 +105,12 @@ variable "superblocks_agent_image" {
   description = "The docker image used by Superblocks Agent container instance"
 }
 
+variable "container_cpu_throttling" {
+  type        = bool
+  default     = false
+  description = "When it's false, CPU is always allocated."
+}
+
 variable "name_prefix" {
   type        = string
   default     = "superblocks"

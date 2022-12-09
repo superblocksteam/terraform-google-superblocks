@@ -80,6 +80,12 @@ variable "deploy_in_cloud_run" {
   EOF
 }
 
+variable "container_cpu_throttling" {
+  type        = bool
+  default     = false
+  description = "When it's false, CPU is always allocated."
+}
+
 variable "container_requests_cpu" {
   type        = string
   default     = "1"

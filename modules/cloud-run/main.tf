@@ -37,8 +37,9 @@ resource "google_cloud_run_service" "superblocks" {
     }
     metadata {
       annotations = {
-        "autoscaling.knative.dev/minScale" = "${var.container_min_capacity}"
-        "autoscaling.knative.dev/maxScale" = "${var.container_max_capacity}"
+        "autoscaling.knative.dev/minScale"  = "${var.container_min_capacity}"
+        "autoscaling.knative.dev/maxScale"  = "${var.container_max_capacity}"
+        "run.googleapis.com/cpu-throttling" = "${var.container_cpu_throttling}"
       }
     }
   }
