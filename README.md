@@ -1,6 +1,6 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/superblocksteam/terraform-google-superblocks/main/assets/logo.png" height="60"/>
-</p>
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/superblocksteam/terraform-google-superblocks/main/assets/logo.png" style="height:60px"/>
+</h1>
 
 <h1 align="center">Superblocks Terraform Module - Google</h1>
 
@@ -93,10 +93,7 @@ container_max_capacity    = "5"
 variable "superblocks_agent_environment" {
   type        = string
   default     = "*"
-  description = <<ENVIRONMENT
-    Use this varible to differentiate Superblocks Agent running environment.
-    Valid values are "*", "staging" and "production"
-  ENVIRONMENT
+  description = "Use this varible to differentiate Superblocks Agent running environment. Valid values are '*', 'staging' and 'production'"
 }
 
 variable "superblocks_agent_image" {
