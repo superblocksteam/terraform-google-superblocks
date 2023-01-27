@@ -1,5 +1,6 @@
 data "google_dns_managed_zone" "superblocks" {
   name = var.zone_name
+  project = var.project_id
 }
 
 locals {
