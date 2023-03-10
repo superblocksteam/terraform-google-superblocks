@@ -13,7 +13,8 @@ This document contains configuration and deployment details for deploying the Su
 ### Install Terraform
 
 To install Terraform on MacOS
-```
+
+```bash
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
@@ -24,8 +25,10 @@ Check out this https://developer.hashicorp.com/terraform/downloads for more deta
 ### Deploy Superblocks On-Premise-Agent
 
 #### Create your Terraform file
+
 To get started, you'll need a `superblocks_agent_key`. To generate an agent key, go to the [Superblocks On-Premise Agent Setup Wizard](https://app.superblocks.com/opas)
-```
+
+```terraform
 module "terraform_google_superblocks" {
   source  = "superblocksteam/superblocks/google"
   version = ">=0.1.0"
@@ -34,47 +37,62 @@ module "terraform_google_superblocks" {
   region     = "[GOOGLE_CLOUD_REGION]"
 
   superblocks_agent_key = "[YOUR_AGENT_KEY]"
-  
+
   # Subdomain & domain in your Superblocks agent host url, for example superblocks.example.com
   sudomain = "[YOUR_SUBDOMAIN]"
   domain   = "[YOUR_DOMAIN]"
-  
+
   # Google Cloud DNS Zone Name
   zone_name = "[YOUR_DOMAINS_CLOUD_DNS_ZONE_NAME]"
 }
 ```
+
+If you are in the **[EU region](https://eu.superblocks.com)**, ensure that
+
+```terraform
+superblocks_agent_data_domain = "eu.superblocks.com"
+```
+
+is set in your configuration in the module block.
+
 If you use Google Cloud DNS, find the `zone_name` for your `domain` by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`. If you don't use Google Cloud DNS, see the [Custom Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains) section for how you can manually configure the DNS for your agent.
 
 #### Deploy
-```
+
+```bash
 terraform init
 terraform apply
 ```
 
 ### Advanced Configuration
+
 #### Private Networking
+
 The Terraform module configures your Cloud Run service's ingress to "Allow all traffic." You can update the ingress rules to "Only allow internal traffic" by adding the following to the Terraform module
 
-```
+```terraform
 internal = true
 ```
 
 #### Custom Domain Mapping
+
 By default, this module will try to configure a **custom domain** for your Cloud Run service, for example `subdomain.example.com`. This configures both the [Cloud Run Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains#map) and a CNAME DNS record for your `domain`.
 
 For this to work successfully, you must verify ownership of your `domain` with Google, and have a Cloud DNS Zone configured for the domain. To verify domain ownership, use the Google CLI command `gcloud domains verify ${domain}`. Find the Cloud DNS Zone Name for your domain by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`.
 
 If you don't use Google Cloud DNS, or want to manually configure the Domain Mapping, just disable DNS creation by adding the following to the Terraform module
 
-```
+```terraform
 create_dns = false
 ```
 
 If you decide to manually set up a custom domain for your Cloud Run service, follow Google's instructions for [Mapping customer domains](https://cloud.google.com/run/docs/mapping-custom-domains#run)
 
 #### Instance Sized
+
 Configure the CPU & memory limits for your Cloud Run instances by adding the following variables to your Terraform module
-```
+
+```terraform
 container_requests_cpu    = "1"
 container_requests_memory = "4Gi"
 container_limits_memory   = "4Gi"
@@ -82,14 +100,17 @@ container_limits_memory   = "4Gi"
 ```
 
 #### Scaling
+
 Google will automatically scale your Cloud Run instances based on traffic. To configure the minimum and maximum number of instances the agent can scale to, add these variables to your Terraform module
-```
+
+```terraform
 container_min_capacity    = "1"
 container_max_capacity    = "5"
 ```
 
 #### Other Configurable Options
-```
+
+```terraform
 variable "superblocks_agent_environment" {
   type        = string
   default     = "*"

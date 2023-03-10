@@ -49,13 +49,23 @@ variable "superblocks_agent_image" {
 
 variable "superblocks_server_url" {
   type    = string
-  default = "https://app.superblocks.com"
+  default = "https://api.superblocks.com"
 }
 
 variable "name_prefix" {
   type        = string
   default     = "superblocks"
   description = "This will be prepended to the name of each resource created by this module"
+}
+
+variable "superblocks_agent_data_domain" {
+  type        = string
+  default     = "app.superblocks.com"
+  validation {
+    condition     = contains(["app.superblocks.com", "eu.superblocks.com"], var.superblocks_agent_data_domain)
+    error_message = "The data domain is invalid. Please use 'app.superblocks.com' or 'eu.superblocks.com'."
+  }
+  description = "The domain name for the specific Superblocks region that hosts your data."
 }
 
 #################################################################
