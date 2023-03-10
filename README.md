@@ -47,15 +47,15 @@ module "terraform_google_superblocks" {
 }
 ```
 
-If you use Google Cloud DNS, find the `zone_name` for your `domain` by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`. If you don't use Google Cloud DNS, see the [Custom Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains) section for how you can manually configure the DNS for your agent.
-
-If you are in the EU region, ensure that
+If you are in the **[EU region](https://eu.superblocks.com)**, ensure that
 
 ```terraform
 superblocks_agent_data_domain = "eu.superblocks.com"
 ```
 
-is set in your configuration.
+is set in your configuration in the module block.
+
+If you use Google Cloud DNS, find the `zone_name` for your `domain` by running `gcloud dns managed-zones list --filter "dns_name ~ ${domain}`. If you don't use Google Cloud DNS, see the [Custom Domain Mapping](https://cloud.google.com/run/docs/mapping-custom-domains) section for how you can manually configure the DNS for your agent.
 
 #### Deploy
 
