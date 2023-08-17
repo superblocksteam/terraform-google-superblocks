@@ -31,7 +31,7 @@ variable "container_image" {
 
 variable "container_port" {
   type    = number
-  default = "8020"
+  default = "8080"
 }
 
 variable "container_env" {

@@ -30,14 +30,31 @@ variable "superblocks_agent_environment" {
   type        = string
   default     = "*"
   description = <<EOF
+    DEPRECATED! Use superblocks_agent_tags instead.
     Use this varible to differentiate Superblocks Agent running environment.
     Valid values are "*", "staging" and "production"
   EOF
 }
 
+variable "superblocks_agent_tags" {
+  type        = string
+  default     = "profile:*"
+  description = <<EOF
+    Use this variable to specify which profile-specific workloads can be executed on this agent.
+    It accepts a comma (and colon) separated string representing key-value pairs, and currently only the "profile" key is used.
+
+    Some examples:
+    - To support all API executions:      "profile:*"
+    - To support staging and production:  "profile:staging,profile:production"
+    - To support only staging:            "profile:staging"
+    - To support only production:         "profile:production"
+    - To support a custom profile:        "profile:custom_profile_key"
+  EOF
+}
+
 variable "superblocks_agent_port" {
   type        = number
-  default     = "8020"
+  default     = "8080"
   description = "The port number used by Superblocks Agent container instance"
 }
 
@@ -66,6 +83,30 @@ variable "superblocks_agent_data_domain" {
     error_message = "The data domain is invalid. Please use 'app.superblocks.com' or 'eu.superblocks.com'."
   }
   description = "The domain name for the specific Superblocks region that hosts your data."
+}
+
+variable "superblocks_grpc_msg_res_max" {
+  type        = string
+  default     = "100000000"
+  description = "The maximum message size in bytes allowed to be sent by the gRPC server. This is used to prevent malicious clients from sending large messages to cause memory exhaustion."
+}
+
+variable "superblocks_grpc_msg_req_max" {
+  type        = string
+  default     = "30000000"
+  description = "The maximum message size in bytes allowed to be received by the gRPC server. This is used to prevent malicious clients from sending large messages to cause memory exhaustion."
+}
+
+variable "superblocks_timeout" {
+  type        = string
+  default     = "10000"
+  description = "The maximum amount of time in milliseconds before a request is aborted. This applies for http requests against the Superblocks server and does not apply to the execution time limit of a workload."
+}
+
+variable "superblocks_log_level" {
+  type        = string
+  default     = "info"
+  description = "Logging level for the superblocks agent"
 }
 
 #################################################################
