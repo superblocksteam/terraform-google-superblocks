@@ -99,7 +99,7 @@ variable "superblocks_grpc_msg_req_max" {
 
 variable "superblocks_timeout" {
   type        = string
-  default     = "10000"
+  default     = "10000000000"
   description = "The maximum amount of time in milliseconds before a request is aborted. This applies for http requests against the Superblocks server and does not apply to the execution time limit of a workload."
 }
 

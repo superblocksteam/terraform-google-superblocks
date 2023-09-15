@@ -54,6 +54,7 @@ module "cloud_run" {
     "SUPERBLOCKS_ORCHESTRATOR_AGENT_ENVIRONMENT"       = "${var.superblocks_agent_environment}"
     "SUPERBLOCKS_ORCHESTRATOR_AGENT_TAGS"              = "${local.superblocks_agent_tags}"
     "SUPERBLOCKS_ORCHESTRATOR_DATA_DOMAIN"             = "${var.superblocks_agent_data_domain}"
+    "SUPERBLOCKS_ORCHESTRATOR_HANDLE_CORS"             = "${var.superblocks_agent_handle_cors}"
   }
 
   container_requests_cpu    = "512m"
