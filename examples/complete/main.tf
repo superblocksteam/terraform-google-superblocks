@@ -32,14 +32,29 @@ module "cloud_run" {
   container_port  = "8020"
 
   container_env = {
-    "__SUPERBLOCKS_AGENT_SERVER_URL"           = "https://app.superblocks.com",
-    "__SUPERBLOCKS_WORKER_LOCAL_ENABLED"       = "true",
-    "SUPERBLOCKS_WORKER_TLS_INSECURE"          = "true",
-    "SUPERBLOCKS_AGENT_KEY"                    = var.superblocks_agent_key,
-    "SUPERBLOCKS_CONTROLLER_DISCOVERY_ENABLED" = "false",
-    "SUPERBLOCKS_AGENT_HOST_URL"               = "https://example-complete.koalitytools.com",
-    "SUPERBLOCKS_AGENT_ENVIRONMENT"            = "*",
-    "SUPERBLOCKS_AGENT_PORT"                   = "8020"
+    "SUPERBLOCKS_ORCHESTRATOR_LOG_LEVEL"               = "${var.superblocks_log_level}"
+    "SUPERBLOCKS_ORCHESTRATOR_HTTP_PORT"               = "${local.superblocks_http_port}"
+    "SUPERBLOCKS_ORCHESTRATOR_GRPC_PORT"               = "8081"
+    "SUPERBLOCKS_ORCHESTRATOR_METRICS_PORT"            = "9090"
+    "SUPERBLOCKS_ORCHESTRATOR_GRPC_BIND"               = "0.0.0.0"
+    "SUPERBLOCKS_ORCHESTRATOR_HTTP_BIND"               = "0.0.0.0"
+    "SUPERBLOCKS_ORCHESTRATOR_GRPC_MSG_RES_MAX"        = "${var.superblocks_grpc_msg_res_max}"
+    "SUPERBLOCKS_ORCHESTRATOR_GRPC_MSG_REQ_MAX"        = "${var.superblocks_grpc_msg_req_max}"
+    "SUPERBLOCKS_ORCHESTRATOR_SUPERBLOCKS_URL"         = "${var.superblocks_server_url}"
+    "SUPERBLOCKS_ORCHESTRATOR_SUPERBLOCKS_TIMEOUT"     = "${var.superblocks_timeout}"
+    "SUPERBLOCKS_ORCHESTRATOR_OTEL_COLLECTOR_HTTP_URL" = "https://traces.intake.superblocks.com:443/v1/traces"
+    "SUPERBLOCKS_ORCHESTRATOR_EMITTER_REMOTE_INTAKE"   = "https://logs.intake.superblocks.com"
+    "SUPERBLOCKS_ORCHESTRATOR_INTAKE_METADATA_URL"     = "https://metadata.intake.superblocks.com"
+    "SUPERBLOCKS_ORCHESTRATOR_TRANSPORT_MODE"          = "grpc"
+    "SUPERBLOCKS_ORCHESTRATOR_STORE_MODE"              = "grpc"
+    "SUPERBLOCKS_AGENT_KEY"                            = "${var.superblocks_agent_key}"
+    "SUPERBLOCKS_ORCHESTRATOR_SUPERBLOCKS_KEY"         = "${var.superblocks_agent_key}"
+    "SUPERBLOCKS_ORCHESTRATOR_FILE_SERVER_URL"         = "http://127.0.0.1:${local.superblocks_http_port}/v2/files"
+    "SUPERBLOCKS_ORCHESTRATOR_AGENT_HOST_URL"          = "https://${var.subdomain}.${var.domain}"
+    "SUPERBLOCKS_ORCHESTRATOR_AGENT_ENVIRONMENT"       = "${var.superblocks_agent_environment}"
+    "SUPERBLOCKS_ORCHESTRATOR_AGENT_TAGS"              = "${local.superblocks_agent_tags}"
+    "SUPERBLOCKS_ORCHESTRATOR_DATA_DOMAIN"             = "${var.superblocks_agent_data_domain}"
+    "SUPERBLOCKS_ORCHESTRATOR_HANDLE_CORS"             = "${var.superblocks_agent_handle_cors}"
   }
 
   container_requests_cpu    = "512m"
