@@ -20,7 +20,7 @@ module "cloud_run" {
 
   container_port  = var.superblocks_agent_port
   container_image = var.superblocks_agent_image
-  container_env = {
+  container_env = merge({
     "SUPERBLOCKS_ORCHESTRATOR_LOG_LEVEL"               = "${var.superblocks_log_level}"
     "SUPERBLOCKS_ORCHESTRATOR_HTTP_PORT"               = "${var.superblocks_agent_port}"
     "SUPERBLOCKS_ORCHESTRATOR_GRPC_PORT"               = "8081"
@@ -44,7 +44,7 @@ module "cloud_run" {
     "SUPERBLOCKS_ORCHESTRATOR_AGENT_TAGS"              = "${var.superblocks_agent_tags}"
     "SUPERBLOCKS_ORCHESTRATOR_DATA_DOMAIN"             = "${var.superblocks_agent_data_domain}"
     "SUPERBLOCKS_ORCHESTRATOR_HANDLE_CORS"             = "${var.superblocks_agent_handle_cors}"
-  }
+  }, var.superblocks_additional_env_vars)
   container_cpu_throttling  = var.container_cpu_throttling
   container_requests_cpu    = var.container_requests_cpu
   container_requests_memory = var.container_requests_memory
