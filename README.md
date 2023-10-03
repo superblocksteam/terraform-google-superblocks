@@ -134,4 +134,41 @@ variable "name_prefix" {
   default     = "superblocks"
   description = "This will be prepended to the name of each resource created by this module"
 }
+
+variable "superblocks_grpc_msg_res_max" {
+  type        = string
+  default     = "100000000"
+  description = "The maximum message size in bytes allowed to be sent by the gRPC server. This is used to prevent malicious clients from sending large messages to cause memory exhaustion."
+}
+
+variable "superblocks_grpc_msg_req_max" {
+  type        = string
+  default     = "30000000"
+  description = "The maximum message size in bytes allowed to be received by the gRPC server. This is used to prevent malicious clients from sending large messages to cause memory exhaustion."
+}
+
+variable "superblocks_timeout" {
+  type        = string
+  default     = "10000000000"
+  description = "The maximum amount of time in milliseconds before a request is aborted. This applies for http requests against the Superblocks server and does not apply to the execution time limit of a workload."
+}
+
+variable "superblocks_log_level" {
+  type        = string
+  default     = "info"
+  description = "Logging level for the superblocks agent. Accepted values are 'debug', 'info', 'warn', 'error', 'fatal', 'panic'."
+}
+
+variable "superblocks_agent_handle_cors" {
+  type        = bool
+  default     = true
+  description = "Whether to handle CORS requests, this will accept all requests from any origin."
+}
+
+variable "superblocks_additional_env_vars" {
+  type       = map(string)
+  default    = {}
+  sensitive  = true
+  description = "Additional environment variables to specify for the Superblocks Agent container."
+}
 ```

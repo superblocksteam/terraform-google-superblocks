@@ -106,13 +106,19 @@ variable "superblocks_timeout" {
 variable "superblocks_log_level" {
   type        = string
   default     = "info"
-  description = "Logging level for the superblocks agent"
+  description = "Logging level for the superblocks agent. Accepted values are 'debug', 'info', 'warn', 'error', 'fatal', 'panic'."
 }
 
 variable "superblocks_agent_handle_cors" {
   type        = bool
   default     = true
-  description = "Whether to handle CORS requests"
+  description = "Whether to handle CORS requests, this will accept all requests from any origin."
+}
+
+variable "superblocks_additional_env_vars" {
+  type       = map(any)
+  default    = {}
+  description = "Additional environment variables to specify for the Superblocks Agent container."
 }
 
 #################################################################
