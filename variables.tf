@@ -76,8 +76,8 @@ variable "name_prefix" {
 }
 
 variable "superblocks_agent_data_domain" {
-  type        = string
-  default     = "app.superblocks.com"
+  type    = string
+  default = "app.superblocks.com"
   validation {
     condition     = contains(["app.superblocks.com", "eu.superblocks.com"], var.superblocks_agent_data_domain)
     error_message = "The data domain is invalid. Please use 'app.superblocks.com' or 'eu.superblocks.com'."
@@ -107,6 +107,12 @@ variable "superblocks_log_level" {
   type        = string
   default     = "info"
   description = "Logging level for the superblocks agent"
+}
+
+variable "superblocks_agent_handle_cors" {
+  type        = bool
+  default     = true
+  description = "Whether to handle CORS requests"
 }
 
 #################################################################
