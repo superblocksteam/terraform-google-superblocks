@@ -29,7 +29,7 @@ module "cloud_run" {
   internal    = false
 
   container_image = "us-east1-docker.pkg.dev/superblocks-registry/superblocks/agent"
-  container_port  = "8020"
+  container_port  = "8080"
 
   container_env = {
     "SUPERBLOCKS_ORCHESTRATOR_LOG_LEVEL"               = "${var.superblocks_log_level}"

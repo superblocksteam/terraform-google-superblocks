@@ -1,4 +1,5 @@
 resource "google_cloud_run_service" "superblocks" {
+  project  = var.project_id
   name     = "${var.name_prefix}-cloud-run-service"
   location = var.region
 
@@ -31,6 +32,20 @@ resource "google_cloud_run_service" "superblocks" {
           content {
             name  = env.key
             value = env.value
+          }
+        }
+        startup_probe {
+          tcp_socket {
+            port = var.container_port
+          }
+        }
+
+        liveness_probe {
+          failure_threshold = var.health_check_failure_threshold
+          period_seconds    = var.health_check_period
+          http_get {
+            path = "/health"
+            port = var.container_port
           }
         }
       }

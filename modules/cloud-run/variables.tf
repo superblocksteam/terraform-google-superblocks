@@ -88,3 +88,15 @@ variable "cloud_run_member" {
   type    = string
   default = "allUsers"
 }
+
+variable "health_check_period" {
+  type        = number
+  default     = 10
+  description = "The interval between health checks in seconds"
+}
+
+variable "health_check_failure_threshold" {
+  type        = number
+  default     = 6
+  description = "The number of consecutive failed health checks before considering the agent unhealthy"
+}

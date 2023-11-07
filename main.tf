@@ -52,6 +52,9 @@ module "cloud_run" {
   container_limits_memory   = var.container_limits_memory
   container_max_capacity    = var.container_max_capacity
   container_min_capacity    = var.container_min_capacity
+
+  health_check_failure_threshold = var.health_check_failure_threshold
+  health_check_period            = var.health_check_period
 }
 
 #################################################################
