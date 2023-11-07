@@ -116,8 +116,8 @@ variable "superblocks_agent_handle_cors" {
 }
 
 variable "superblocks_additional_env_vars" {
-  type       = map(any)
-  default    = {}
+  type        = map(any)
+  default     = {}
   description = "Additional environment variables to specify for the Superblocks Agent container."
 }
 

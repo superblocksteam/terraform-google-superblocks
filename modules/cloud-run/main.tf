@@ -41,8 +41,8 @@ resource "google_cloud_run_service" "superblocks" {
         }
 
         liveness_probe {
-          failure_threshold = 6
-          period_seconds    = 10
+          failure_threshold = var.health_check_failure_threshold
+          period_seconds    = var.health_check_period
           http_get {
             path = "/health"
             port = var.container_port
