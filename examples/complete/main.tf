@@ -51,7 +51,6 @@ module "cloud_run" {
     "SUPERBLOCKS_ORCHESTRATOR_SUPERBLOCKS_KEY"         = "${var.superblocks_agent_key}"
     "SUPERBLOCKS_ORCHESTRATOR_FILE_SERVER_URL"         = "http://127.0.0.1:${local.superblocks_http_port}/v2/files"
     "SUPERBLOCKS_ORCHESTRATOR_AGENT_HOST_URL"          = "https://${var.subdomain}.${var.domain}"
-    "SUPERBLOCKS_ORCHESTRATOR_AGENT_ENVIRONMENT"       = "${var.superblocks_agent_environment}"
     "SUPERBLOCKS_ORCHESTRATOR_AGENT_TAGS"              = "${local.superblocks_agent_tags}"
     "SUPERBLOCKS_ORCHESTRATOR_DATA_DOMAIN"             = "${var.superblocks_agent_data_domain}"
     "SUPERBLOCKS_ORCHESTRATOR_HANDLE_CORS"             = "${var.superblocks_agent_handle_cors}"
