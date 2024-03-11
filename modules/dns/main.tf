@@ -26,5 +26,11 @@ resource "google_dns_record_set" "superblocks" {
   name         = "${var.record_name}.${local.dns_name}"
   ttl          = 300
   type         = "CNAME"
-  rrdatas      = ["${var.record_name}.${local.dns_name}"]
+
+  rrdatas = flatten([
+    for _, status in google_cloud_run_domain_mapping.superblocks.status: [
+      for _, rrs in status.resource_records:
+      rrs.rrdata
+    ]
+  ])
 }
