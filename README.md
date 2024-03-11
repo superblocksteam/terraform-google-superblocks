@@ -88,6 +88,8 @@ create_dns = false
 
 If you decide to manually set up a custom domain for your Cloud Run service, follow Google's instructions for [Mapping customer domains](https://cloud.google.com/run/docs/mapping-custom-domains#run)
 
+Note: Provisioning of TLS certificates in Google will take some time. You can use `gcloud beta run domain-mappings describe --domain $SUBDOMAIN.$DOMAIN` to inspect progress of the provisioning.
+
 #### Instance Sized
 
 Configure the CPU & memory limits for your Cloud Run instances by adding the following variables to your Terraform module
