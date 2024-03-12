@@ -121,6 +121,38 @@ variable "superblocks_additional_env_vars" {
   description = "Additional environment variables to specify for the Superblocks Agent container."
 }
 
+#### Signing and Resigning
+
+variable "superblocks_agent_signing_key_id" {
+  type        = string
+  default     = ""
+  description = "The key id of the signing key used to sign the organization's resources"
+}
+
+variable "superblocks_agent_verification_key_ids" {
+  type        = string
+  default     = ""
+  description = "The key ids of the verification keys used to verify the org's resources. This is a space separated list of key ids."
+}
+
+variable "superblocks_agent_signature_keys" {
+  type        = string
+  default     = ""
+  description = "The key data specified in the form of <key_id>:<key_data>. This is a comma separated list of key data."
+}
+
+variable "superblocks_agent_signature_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to enable verification of the organization's resources. Note that all resources MUST have been signed prior to enabling this feature."
+}
+
+variable "superblocks_agent_resigner_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to enable the resigner. This will allow the agent to bulk sign the organization's resources."
+}
+
 #################################################################
 # Cloud Run
 #################################################################
