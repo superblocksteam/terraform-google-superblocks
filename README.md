@@ -31,7 +31,7 @@ To get started, you'll need a `superblocks_agent_key`. To generate an agent key,
 ```terraform
 module "terraform_google_superblocks" {
   source  = "superblocksteam/superblocks/google"
-  version = ">=0.1.0"
+  version = "~>1.0"
 
   project_id = "[GOOGLE_CLOUD_PROJECT_ID]"
   region     = "[GOOGLE_CLOUD_REGION]"
