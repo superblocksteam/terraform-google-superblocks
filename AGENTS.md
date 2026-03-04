@@ -4,7 +4,7 @@
 
 Customer-facing Terraform module that deploys the Superblocks **On-Premise Agent (OPA)** on Google Cloud Platform. The agent runs on **Cloud Run** with optional custom domain mapping and Cloud DNS configuration. Published to the Terraform Registry as [`superblocksteam/superblocks/google`](https://registry.terraform.io/modules/superblocksteam/superblocks/google).
 
-This module deploys the same `orchestrator` Docker image used across all Superblocks agent deployments.
+This module deploys the Docker image maintained in the `orchestrator`/`agent` repository.
 
 ## Engineering-Wide Context
 
